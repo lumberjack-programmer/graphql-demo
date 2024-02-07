@@ -12,7 +12,7 @@ import reactor.core.publisher.Flux;
 import java.time.LocalDate;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static reactor.core.publisher.Mono.when;
+import static org.mockito.Mockito.when;
 
 @GraphQlTest(CompanyController.class)
 class CompanyControllerTest {
@@ -30,7 +30,7 @@ class CompanyControllerTest {
                         "private",
                         "12345678",
                         "UK",
-                        LocalDate.of(2020, 1, 1),
+                        LocalDate.of(2024, 1, 1),
                         0,
                         "Test Company",
                         "active")));
@@ -41,15 +41,15 @@ class CompanyControllerTest {
                 .execute()
                 .path("companyList")
                 .matchesJson("""
-                        [{
-                             "id": null,
-                             "SIC":1234,
-                             "name": "Test Company",
-                             "status": "active",
-                             "category": "private",
-                             "companyNumber": "12345678",
-                             "countryOfOrigin": "UK"
-                        }]
-                         """);
+                    [{
+                        "id": null,
+                        "SIC": "1234",
+                        "name": "Test Company",
+                        "status": "active",
+                        "category": "private",
+                        "companyNumber": "12345678",
+                        "countryOfOrigin": "UK"
+                    }]
+                """);
     }
 }
